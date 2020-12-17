@@ -22,8 +22,6 @@ export default function BaseCartScreen() {
     let match = useRouteMatch();
     let param = useParams();
     const history = useHistory();
-    console.log("params BaseCartScreen:", param);
-    console.log("match BaseCartScreen:", match);
 
     return <CartScreen match={match.url} history={history} />
 }

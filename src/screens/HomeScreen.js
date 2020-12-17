@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../src/assets/styles/home.css';
-import { Link, useRouteMatch, useParams, useHistory, useLocation } from "react-router-dom";
+import { Link, useRouteMatch, useParams, useHistory } from "react-router-dom";
 
 class HomeScreen extends Component {
 
@@ -44,7 +44,7 @@ class HomeScreen extends Component {
             this.getProducts();
             return;
         }
-        this.getProductsBySlug(e.slug)
+        this.getProductsBySlug(e.slug);
     }
 
     getProductsBySlug = async (slug) => {
@@ -68,16 +68,37 @@ class HomeScreen extends Component {
             }))
     }
 
+    onAdd = (item) => {
+        console.log('item11:', item);
+        this.addItemToCart(item);
+    }
+
+    addItemToCart = async (item) => {
+        try {
+            console.log("pa:", item);
+            const res = await axios.post('http://localhost:3000/cart/item/add', item);
+            console.log("resadd:", res);
+            alert(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     renderProducts = () => {
         const { products } = this.state;
         return (
             products.map((e, i) => {
                 return (
                     <div className="product-item" key={e.id}>
-                        <img src={e.image} className="image-product" />
-                        <span style={{ alignSelf: 'center', marginTop: 10 }}>Mã máy: {e.product_code}</span>
+                        <img src={e.image} className="image-product" alt="product" />
                         <span className="title-product">{e.name}</span>
                         <span style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
+                        <div
+                            style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
+                            onClick={() => this.onAdd(e)}
+                        >
+                            <span style={{ color: 'white' }}>Thêm vào giỏ hàng</span>
+                        </div>
                     </div>
                 )
             })
@@ -85,14 +106,37 @@ class HomeScreen extends Component {
     }
 
     render() {
-        console.log("PCCCL:", this.props.history)
         return (
             <div>
-                <div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', }}>
-                    <h1 >Trang chủ</h1>
-                </div>
+                <h1 >Trang chủ</h1>
+                {
+                    <div style={{
+                        position: 'fixed',
+                        right: 0,
+                    }}>
+                        <Link
+                            to={'/login'}
+                            style={{
+                                padding: 10,
+                                margin: 4,
+                                backgroundColor: 'yellow'
+                            }}>
+                            <span>Đăng nhập</span>
+                        </Link>
 
-                <Link
+                        <Link
+                            to={'/register'}
+                            style={{
+                                margin: 4,
+                                padding: 10,
+                                backgroundColor: 'green'
+                            }}>
+                            <span>Đăng ký</span>
+                        </Link>
+                    </div>
+                }
+
+                {/* <Link
                     to={'/cart'}
                     style={{
                         padding: 10,
@@ -101,11 +145,12 @@ class HomeScreen extends Component {
                         backgroundColor: 'yellow'
                     }}
                 >
+
                     <span style={{
                         fontWeight: 'bold',
                         color: 'red'
                     }}>Giỏ hàng: 0 sản phẩm</span>
-                </Link>
+                </Link> */}
 
                 <div className="menu">
                     {this.renderMenu()}
@@ -114,6 +159,7 @@ class HomeScreen extends Component {
                 <div className="products">
                     {this.renderProducts()}
                 </div>
+
 
             </div>
         );
@@ -125,9 +171,6 @@ export default function BaseHomeScreen() {
     let match = useRouteMatch();
     let param = useParams();
     const history = useHistory();
-    console.log("params:", param);
-    console.log("match:", match);
-    console.log('his:', history)
     return <HomeScreen match={match.url} history={history} />
 }
 
