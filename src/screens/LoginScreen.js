@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link, useRouteMatch, useParams, useHistory } from "react-router-dom";
 
 class LoginScreen extends Component {
 
@@ -19,16 +20,39 @@ class LoginScreen extends Component {
         this.setState({ password: e.target.value });
     }
 
-    onLoigin = async () => {
-        try {
-            const params = {
-                username: this.state.username,
-                password: this.state.password
+    onValidate = () => {
+        const { username, password } = this.state;
+        if (username == '') {
+            alert('Chưa nhập username');
+            return false;
+        }
+
+        if (password == '') {
+            alert('chưa nhập password');
+            return;
+        }
+
+        return true;
+    }
+
+    onLogin = async () => {
+        if (this.onValidate()) {
+            try {
+                const params = {
+                    username: this.state.username,
+                    password: this.state.password
+                }
+                const res = await axios.post('http://localhost:3000/api/login', params);
+                console.log("onLoigin:", res)
+                if (res.data.status == 200) {
+                    // this.props.history.goBack()
+                    await localStorage.setItem("user", JSON.stringify(res.data));
+                    this.props.history.push('/');
+                    return;
+                }
+            } catch (e) {
+                console.log(e);
             }
-            const res = await axios.post('http://localhost:3000/api/login', params);
-            console.log("onLoigin:", res)
-        } catch (e) {
-            console.log(e);
         }
     }
 
@@ -65,7 +89,7 @@ class LoginScreen extends Component {
                         padding: 10, marginTop: 20,
                         backgroundColor: '#42ABE1'
                     }}
-                    onClick={this.onLoigin}>
+                    onClick={this.onLogin}>
                     <span> Đăng nhập </span>
                 </div>
 
@@ -76,8 +100,11 @@ class LoginScreen extends Component {
 
 
 
-export default function BaseLoginScreen(params) {
+export default function BaseLoginScreen() {
+    let match = useRouteMatch();
+    let param = useParams();
+    const history = useHistory();
     return (
-        <LoginScreen />
+        <LoginScreen match={match} param={param} history={history} />
     )
 };

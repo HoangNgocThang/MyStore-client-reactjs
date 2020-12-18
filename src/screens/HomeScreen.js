@@ -8,14 +8,26 @@ class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: null,
             categoies: [],
             products: []
         };
     }
 
     componentDidMount() {
+        this.getAuth();
         this.getCategory();
         this.getProducts();
+    }
+
+    getAuth = async () => {
+        try {
+            let user = await localStorage.getItem('user');
+            console.log();
+            this.setState({ user: JSON.parse(user) })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     getCategory = async () => {
@@ -109,48 +121,45 @@ class HomeScreen extends Component {
         return (
             <div>
                 <h1 >Trang chủ</h1>
-                {
-                    <div style={{
-                        position: 'fixed',
-                        right: 0,
-                    }}>
-                        <Link
-                            to={'/login'}
-                            style={{
-                                padding: 10,
-                                margin: 4,
-                                backgroundColor: 'yellow'
-                            }}>
-                            <span>Đăng nhập</span>
-                        </Link>
+                <div style={{ position: 'fixed', right: 0 }}>
+                    {
+                        this.state.user ?
+                            <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span>
+                            :
+                            <Link
+                                to={'/login'}
+                                style={{
+                                    padding: 10,
+                                    margin: 4,
+                                    backgroundColor: 'yellow'
+                                }}>
+                                <span>Đăng nhập</span>
+                            </Link>
 
-                        <Link
-                            to={'/register'}
-                            style={{
-                                margin: 4,
-                                padding: 10,
-                                backgroundColor: 'green'
-                            }}>
-                            <span>Đăng ký</span>
-                        </Link>
-                    </div>
-                }
 
-                {/* <Link
-                    to={'/cart'}
-                    style={{
-                        padding: 10,
-                        position: 'fixed',
-                        right: 0,
-                        backgroundColor: 'yellow'
-                    }}
-                >
+                    }
+                    {
+                        this.state.user ?
+                            <div
+                                style={{
+                                    margin: 4,
+                                    padding: 10,
+                                    backgroundColor: 'pink'
+                                }}>
+                                <span>Đăng xuất</span>
+                            </div> :
+                            <Link
+                                to={'/register'}
+                                style={{
+                                    margin: 4,
+                                    padding: 10,
+                                    backgroundColor: 'green'
+                                }}>
+                                <span>Đăng ký</span>
+                            </Link>
+                    }
 
-                    <span style={{
-                        fontWeight: 'bold',
-                        color: 'red'
-                    }}>Giỏ hàng: 0 sản phẩm</span>
-                </Link> */}
+                </div>
 
                 <div className="menu">
                     {this.renderMenu()}
@@ -159,7 +168,6 @@ class HomeScreen extends Component {
                 <div className="products">
                     {this.renderProducts()}
                 </div>
-
 
             </div>
         );

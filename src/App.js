@@ -23,7 +23,6 @@ export default function App() {
           <Route path="/">
             <BaseHomeScreen />
           </Route>
-
         </Switch>
       </div>
     </Router>
