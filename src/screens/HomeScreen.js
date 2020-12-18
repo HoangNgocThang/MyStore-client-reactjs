@@ -135,8 +135,6 @@ class HomeScreen extends Component {
                                 }}>
                                 <span>Đăng nhập</span>
                             </Link>
-
-
                     }
                     {
                         this.state.user ?
