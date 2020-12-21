@@ -33,7 +33,7 @@ class HomeScreen extends Component {
     getCategory = async () => {
         try {
             const res = await axios.get(`${Constant.BASE_URL}/category`);
-            this.setState({ categoies: [{ id: 4, name: "Tất cả", slug: '' }].concat(res.data.data) });
+            this.setState({ categoies: [{ id: 4, name: "Tất cả", slug: '', selected: true }].concat(res.data.data) });
         } catch (e) {
             console.log(e);
         }
@@ -49,7 +49,6 @@ class HomeScreen extends Component {
     }
 
     handleClickItem = (e) => {
-        console.log(e)
         if (e.id == 4) {
             this.getProducts();
             return;
@@ -71,24 +70,34 @@ class HomeScreen extends Component {
         return (
             categoies.map((e, i) => {
                 return (
-                    <div key={e.id} className="menu-item" onClick={() => this.handleClickItem(e)}>
+                    <div
+                        style={{ backgroundColor: '#C7EDFC' }}
+                        key={e.id} className="menu-item" onClick={() => this.handleClickItem(e)}>
                         <span>{e.name}</span>
                     </div>
                 )
             }))
     }
 
-    onAdd = (item) => {
+    onAdd = async (item) => {
+        if (this.state.user == null) {
+            alert('Vui lòng đăng nhập');
+            return;
+        }
         console.log('item11:', item);
-        this.addItemToCart(item);
-    }
-
-    addItemToCart = async (item) => {
         try {
-            console.log("pa:", item);
-            const res = await axios.post(`${Constant}/cart/item/add`, item);
+            console.log("pa:", item, this.state.user);
+            const res = await axios.post(`${Constant.BASE_URL}/cart/item/add`, item, {
+                headers: {
+                    'Authorization': `Basic ${this.state.user && this.state.user.access_token}`
+                }
+            });
             console.log("resadd:", res);
-            alert(res.data);
+            if (res.data.status != 200) {
+                alert(res.data.message);
+                return;
+            }
+            alert(res.data.message);
         } catch (error) {
             console.log(error);
         }
@@ -141,7 +150,7 @@ class HomeScreen extends Component {
                         width: 80,
                         padding: 10,
                         margin: 4,
-                        backgroundColor: 'pink',
+                        backgroundColor: 'orange',
                     }}>
                     <span>Giỏ hàng</span>
                 </div>
