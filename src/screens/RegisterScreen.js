@@ -1,4 +1,6 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
+import { useRouteMatch, useParams, useHistory } from "react-router-dom";
 
 class RegisterScreen extends Component {
     constructor(props) {
@@ -8,7 +10,7 @@ class RegisterScreen extends Component {
             password: '',
             name: '',
             phone: '',
-            address: ''
+            address: '',
         };
     }
 
@@ -29,7 +31,63 @@ class RegisterScreen extends Component {
     }
 
     handleChangeAddress = (e) => {
-        this.setState({ phone: e.target.value });
+        this.setState({ address: e.target.value });
+    }
+
+    validate = () => {
+        const { username, password, name, phone, address } = this.state;
+
+        if (username == '') {
+            alert('username không đc bỏ trống');
+            return false;
+        }
+
+        if (password == '') {
+            alert('password không đc bỏ trống');
+            return false;
+        }
+
+        if (name == '') {
+            alert('name không đc bỏ trống');
+            return false;
+        }
+
+        if (phone == '') {
+            alert('phone không đc bỏ trống');
+            return false;
+        }
+
+        if (address == '') {
+            alert('address không đc bỏ trống');
+            return false;
+        }
+
+        return true;
+    }
+
+    onRegister = async () => {
+        const { username, password, name, phone, address } = this.state;
+        if (this.validate()) {
+            try {
+                const params = {
+                    username: username,
+                    password: password,
+                    name: name,
+                    phone: phone,
+                    address: address
+                }
+                const res = await Axios.post('http://localhost:3000/api/register', params);
+                console.log("Dangki:", res);
+                if (res.data.status != 200) {
+                    setTimeout(() => { alert(res.data.message) }, 250);
+                    return;
+                }
+                alert(res.data.message);
+                this.props.history.push('/');
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 
     render() {
@@ -80,14 +138,6 @@ class RegisterScreen extends Component {
                     value={address}
                 />
 
-                <input
-                    style={{ width: 200, marginTop: 10 }}
-                    placeholder="Phone"
-                    id="phone"
-                    onChange={this.handleChangeName}
-                    value={phone}
-                />
-
                 <div
                     style={{
                         display: 'flex',
@@ -97,8 +147,8 @@ class RegisterScreen extends Component {
                         padding: 10, marginTop: 20,
                         backgroundColor: '#42ABE1'
                     }}
-                    onClick={this.onLoigin}>
-                    <span> Đăng nhập </span>
+                    onClick={this.onRegister}>
+                    <span> Đăng ký </span>
                 </div>
 
             </div>
@@ -108,5 +158,8 @@ class RegisterScreen extends Component {
 
 
 export default function BaseRegisterScreen() {
-    return <RegisterScreen />
+    let match = useRouteMatch();
+    let param = useParams();
+    const history = useHistory();
+    return <RegisterScreen match={match.url} history={history} />
 } 

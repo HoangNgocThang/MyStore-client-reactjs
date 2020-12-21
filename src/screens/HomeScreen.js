@@ -117,6 +117,10 @@ class HomeScreen extends Component {
         )
     }
 
+    logout = ()=> {
+        alert('1')
+    }
+
     render() {
         return (
             <div>
@@ -124,8 +128,7 @@ class HomeScreen extends Component {
                 <div style={{ position: 'fixed', right: 0 }}>
                     {
                         this.state.user ?
-                            <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span>
-                            :
+                            <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span>:
                             <Link
                                 to={'/login'}
                                 style={{
@@ -139,6 +142,7 @@ class HomeScreen extends Component {
                     {
                         this.state.user ?
                             <div
+                                onClick={this.logout}
                                 style={{
                                     margin: 4,
                                     padding: 10,
