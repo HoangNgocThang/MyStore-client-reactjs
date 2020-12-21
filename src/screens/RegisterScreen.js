@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import { useRouteMatch, useParams, useHistory } from "react-router-dom";
+import Constant from '../constant';
 
 class RegisterScreen extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class RegisterScreen extends Component {
                     phone: phone,
                     address: address
                 }
-                const res = await Axios.post('http://localhost:3000/api/register', params);
+                const res = await Axios.post(`${Constant.BASE_URL}/api/register`, params);
                 console.log("Dangki:", res);
                 if (res.data.status != 200) {
                     setTimeout(() => { alert(res.data.message) }, 250);

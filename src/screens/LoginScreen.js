@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, useRouteMatch, useParams, useHistory } from "react-router-dom";
+import Constant from '../constant';
 
 class LoginScreen extends Component {
 
@@ -42,7 +43,7 @@ class LoginScreen extends Component {
                     username: this.state.username,
                     password: this.state.password
                 }
-                const res = await axios.post('http://localhost:3000/api/login', params);
+                const res = await axios.post(`${Constant.BASE_URL}/api/login`, params);
                 console.log("onLoigin:", res)
                 if (res.data.status == 200) {
                     // this.props.history.goBack()

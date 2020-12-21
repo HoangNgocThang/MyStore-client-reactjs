@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../src/assets/styles/home.css';
-import { Link, useRouteMatch, useParams, useHistory } from "react-router-dom";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import Constant from '../constant';
 
 class HomeScreen extends Component {
 
@@ -31,7 +32,7 @@ class HomeScreen extends Component {
 
     getCategory = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/category");
+            const res = await axios.get(`${Constant.BASE_URL}/category`);
             this.setState({ categoies: [{ id: 4, name: "Tất cả", slug: '' }].concat(res.data.data) });
         } catch (e) {
             console.log(e);
@@ -40,7 +41,7 @@ class HomeScreen extends Component {
 
     getProducts = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/products/index");
+            const res = await axios.get(`${Constant.BASE_URL}/products/index`);
             this.setState({ products: res.data.data });
         } catch (e) {
             console.log(e);
@@ -58,7 +59,7 @@ class HomeScreen extends Component {
 
     getProductsBySlug = async (slug) => {
         try {
-            const res = await axios.get('http://localhost:3000/products/show/' + slug);
+            const res = await axios.get(`${Constant.BASE_URL}/products/show/${slug}`);
             this.setState({ products: res.data.data });
         } catch (error) {
             console.log(error);
@@ -85,7 +86,7 @@ class HomeScreen extends Component {
     addItemToCart = async (item) => {
         try {
             console.log("pa:", item);
-            const res = await axios.post('http://localhost:3000/cart/item/add', item);
+            const res = await axios.post(`${Constant}/cart/item/add`, item);
             console.log("resadd:", res);
             alert(res.data);
         } catch (error) {
@@ -122,10 +123,28 @@ class HomeScreen extends Component {
         })
     }
 
+    onClickCart = () => {
+        if (this.state.user == null) {
+            alert('Vui lòng đăng nhập');
+            return;
+        }
+        this.props.history.push('/cart');
+    }
+
     render() {
         return (
             <div>
-                <h1 >Trang chủ</h1>
+                <h1>Trang chủ</h1>
+                <div
+                    onClick={this.onClickCart}
+                    style={{
+                        width: 80,
+                        padding: 10,
+                        margin: 4,
+                        backgroundColor: 'pink',
+                    }}>
+                    <span>Giỏ hàng</span>
+                </div>
                 <div style={{ position: 'fixed', right: 0 }}>
                     {
                         this.state.user ?
