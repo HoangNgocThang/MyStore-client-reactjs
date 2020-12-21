@@ -20,7 +20,6 @@ class CartScreen extends Component {
 
 export default function BaseCartScreen() {
     let match = useRouteMatch();
-    let param = useParams();
     const history = useHistory();
 
     return <CartScreen match={match.url} history={history} />

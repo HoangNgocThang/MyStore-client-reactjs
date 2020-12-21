@@ -83,6 +83,7 @@ class RegisterScreen extends Component {
                     return;
                 }
                 alert(res.data.message);
+                await localStorage.clear();
                 this.props.history.push('/');
             } catch (error) {
                 console.log(error);
@@ -159,7 +160,6 @@ class RegisterScreen extends Component {
 
 export default function BaseRegisterScreen() {
     let match = useRouteMatch();
-    let param = useParams();
     const history = useHistory();
     return <RegisterScreen match={match.url} history={history} />
 } 

@@ -23,7 +23,6 @@ class HomeScreen extends Component {
     getAuth = async () => {
         try {
             let user = await localStorage.getItem('user');
-            console.log();
             this.setState({ user: JSON.parse(user) })
         } catch (error) {
             console.log(error);
@@ -33,7 +32,6 @@ class HomeScreen extends Component {
     getCategory = async () => {
         try {
             const res = await axios.get("http://localhost:3000/category");
-            console.log(res)
             this.setState({ categoies: [{ id: 4, name: "Tất cả", slug: '' }].concat(res.data.data) });
         } catch (e) {
             console.log(e);
@@ -43,7 +41,6 @@ class HomeScreen extends Component {
     getProducts = async () => {
         try {
             const res = await axios.get("http://localhost:3000/products/index");
-            console.log(res);
             this.setState({ products: res.data.data });
         } catch (e) {
             console.log(e);
@@ -117,8 +114,12 @@ class HomeScreen extends Component {
         )
     }
 
-    logout = ()=> {
-        alert('1')
+    logout = () => {
+        this.setState({
+            user: null
+        }, () => {
+            localStorage.clear();
+        })
     }
 
     render() {
@@ -128,7 +129,7 @@ class HomeScreen extends Component {
                 <div style={{ position: 'fixed', right: 0 }}>
                     {
                         this.state.user ?
-                            <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span>:
+                            <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span> :
                             <Link
                                 to={'/login'}
                                 style={{
@@ -179,7 +180,6 @@ class HomeScreen extends Component {
 
 export default function BaseHomeScreen() {
     let match = useRouteMatch();
-    let param = useParams();
     const history = useHistory();
     return <HomeScreen match={match.url} history={history} />
 }

@@ -102,9 +102,8 @@ class LoginScreen extends Component {
 
 export default function BaseLoginScreen() {
     let match = useRouteMatch();
-    let param = useParams();
     const history = useHistory();
     return (
-        <LoginScreen match={match} param={param} history={history} />
+        <LoginScreen match={match} history={history} />
     )
 };
