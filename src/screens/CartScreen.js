@@ -50,31 +50,84 @@ class CartScreen extends Component {
         }
     }
 
+    onIncrease = async (e) => {
+        console.log(e);
+        try {
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
+            const res = await Axios.post(`${Constant.BASE_URL}/cart/item/increase`, e, {
+                headers: {
+                    'Authorization': `Bearer ${userPar && userPar.access_token}`
+                }
+            });
+            console.log('res:', res);
+            if (res.data.status != 200) {
+                alert(res.data.message);
+                return;
+            }
+            this.showCart();
+        } catch (error) {
+            console.log('error:', error);
+        }
+    }
+
+    onDecrease = async (e) => {
+        try {
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
+            const res = await Axios.post(`${Constant.BASE_URL}/cart/item/decrease`, e, {
+                headers: {
+                    'Authorization': `Bearer ${userPar && userPar.access_token}`
+                }
+            });
+            console.log('res:', res);
+            if (res.data.status != 200) {
+                alert(res.data.message);
+                return;
+            }
+            this.showCart();
+        } catch (error) {
+            console.log('error:', error);
+        }
+    }
+
     renderListProduct = () => {
         const { data } = this.state;
         return data.map((e, i) => {
             return (
                 <div key={e.id_product} className="item-cart">
                     <img src={e.image} alt={"product"} style={{ width: 100, height: 100 }} />
+
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span>{e.name}</span>
                         <span style={{ color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
+                        <span>Số lượng: {e.quantity}</span>
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
                                 padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'green'
-                            }}>
+                            }}
+                                onClick={() => this.onIncrease(e)}
+                            >
                                 <span style={{ color: 'white', fontSize: 16 }}>+</span>
                             </div>
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
                                 padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'green'
-                            }}>
+                            }}
+                                onClick={() => this.onDecrease(e)}
+                            >
                                 <span style={{ color: 'white', fontSize: 16 }}>-</span>
+                            </div>
+
+                            <div style={{
+                                display: 'flex', justifyContent: 'center', alignContent: 'center',
+                                padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'red'
+                            }}>
+                                <span style={{ color: 'white', fontSize: 16 }}>X</span>
                             </div>
                         </div>
                     </div>
-
                 </div>
             )
         })
@@ -85,7 +138,7 @@ class CartScreen extends Component {
         return (
             <div>
                 <h1> Giỏ hàng </h1>
-                <span>{this.state.user && this.state.user.username}</span>
+                <span>Tài khoản: {this.state.user && this.state.user.username}</span>
                 { this.renderListProduct()}
             </div>
         );
