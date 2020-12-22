@@ -89,7 +89,7 @@ class HomeScreen extends Component {
             console.log("pa:", item, this.state.user);
             const res = await axios.post(`${Constant.BASE_URL}/cart/item/add`, item, {
                 headers: {
-                    'Authorization': `Basic ${this.state.user && this.state.user.access_token}`
+                    'Authorization': `Bearer ${this.state.user && this.state.user.access_token}`
                 }
             });
             console.log("resadd:", res);
