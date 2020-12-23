@@ -11,7 +11,8 @@ class HomeScreen extends Component {
         this.state = {
             user: null,
             categoies: [],
-            products: []
+            products: [],
+            total: 0
         };
     }
 
@@ -19,6 +20,7 @@ class HomeScreen extends Component {
         this.getAuth();
         this.getCategory();
         this.getProducts();
+        this.getTotalItemInCart();
     }
 
     getAuth = async () => {
@@ -45,6 +47,25 @@ class HomeScreen extends Component {
             this.setState({ products: res.data.data });
         } catch (e) {
             console.log(e);
+        }
+    }
+
+    getTotalItemInCart = async () => {
+        try {
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
+            const res = await axios.get(`${Constant.BASE_URL}/cart/item/total`, {
+                headers: {
+                    'Authorization': `Bearer ${userPar && userPar.access_token}`
+                }
+            });
+            console.log('getTotalItemInCart:', res);
+            this.setState({
+                total: res.data.total
+            })
+
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -154,6 +175,7 @@ class HomeScreen extends Component {
                     }}>
                     <span>Giỏ hàng</span>
                 </div>
+                {  this.state.user && <span style={{ margin: 4, color: 'red' }}>Hiện có {this.state.total} sản phẩm</span>}
                 <div style={{ position: 'fixed', right: 0 }}>
                     {
                         this.state.user ?
