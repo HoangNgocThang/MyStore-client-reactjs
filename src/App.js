@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BaseCartScreen from "./screens/CartScreen";
 import BaseHomeScreen from "./screens/HomeScreen";
 import BaseLoginScreen from "./screens/LoginScreen";
+import BaseOrderScreen from "./screens/OrderScreen";
 import BaseRegisterScreen from "./screens/RegisterScreen";
 
 export default function App() {
@@ -18,6 +19,9 @@ export default function App() {
           </Route>
           <Route path='/register'>
             <BaseRegisterScreen />
+          </Route>
+          <Route path="/order">
+            <BaseOrderScreen />
           </Route>
           <Route path="/">
             <BaseHomeScreen />

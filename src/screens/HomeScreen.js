@@ -118,7 +118,8 @@ class HomeScreen extends Component {
                 alert(res.data.message);
                 return;
             }
-            alert(res.data.message);
+            this.getTotalItemInCart();
+            setTimeout(() => { alert(res.data.message) }, 250)
         } catch (error) {
             console.log(error);
         }
@@ -161,21 +162,44 @@ class HomeScreen extends Component {
         this.props.history.push('/cart');
     }
 
+    onClickOrder = () => {
+        if (this.state.user == null) {
+            alert('Vui lòng đăng nhập');
+            return;
+        }
+        this.props.history.push('/order');
+    }
+
     render() {
         return (
             <div>
                 <h1>Trang chủ</h1>
-                <div
-                    onClick={this.onClickCart}
-                    style={{
-                        width: 80,
-                        padding: 10,
-                        margin: 4,
-                        backgroundColor: 'orange',
-                    }}>
-                    <span>Giỏ hàng</span>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        onClick={this.onClickCart}
+                        style={{
+                            padding: 10,
+                            margin: 4,
+                            backgroundColor: 'yellow',
+                        }}>
+                        {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</span>}
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/833/833314.svg"
+                            style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                    </div>
+
+                    <div
+                        onClick={this.onClickOrder}
+                        style={{
+                            padding: 10,
+                            margin: 4,
+                            backgroundColor: 'green'
+                        }}>
+                        <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Đơn hàng</span>
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
+                            style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                    </div>
                 </div>
-                {  this.state.user && <span style={{ margin: 4, color: 'red' }}>Hiện có {this.state.total} sản phẩm</span>}
+
                 <div style={{ position: 'fixed', right: 0 }}>
                     {
                         this.state.user ?
@@ -211,17 +235,13 @@ class HomeScreen extends Component {
                                 <span>Đăng ký</span>
                             </Link>
                     }
-
                 </div>
-
                 <div className="menu">
                     {this.renderMenu()}
                 </div>
-
                 <div className="products">
                     {this.renderProducts()}
                 </div>
-
             </div>
         );
     }
