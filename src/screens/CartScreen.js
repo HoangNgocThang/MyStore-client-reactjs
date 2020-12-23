@@ -91,8 +91,33 @@ class CartScreen extends Component {
         }
     }
 
+    onRemove = async (e) => {
+        try {
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
+            const res = await Axios.post(`${Constant.BASE_URL}/cart/item/remove`, e, {
+                headers: {
+                    'Authorization': `Bearer ${userPar && userPar.access_token}`
+                }
+            });
+            console.log('res:', res);
+            if (res.data.status != 200) {
+                alert(res.data.message);
+                return;
+            }
+            this.showCart();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     renderListProduct = () => {
         const { data } = this.state;
+        if(data.length==0) {
+            return <div>
+                <span style={{color:'grey'}}>Giỏ hàng trống </span>
+            </div>
+        }
         return data.map((e, i) => {
             return (
                 <div key={e.id_product} className="item-cart">
@@ -123,7 +148,9 @@ class CartScreen extends Component {
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
                                 padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'red'
-                            }}>
+                            }}
+                                onClick={() => this.onRemove(e)}
+                            >
                                 <span style={{ color: 'white', fontSize: 16 }}>X</span>
                             </div>
                         </div>
