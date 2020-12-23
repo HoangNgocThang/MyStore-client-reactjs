@@ -113,9 +113,9 @@ class CartScreen extends Component {
 
     renderListProduct = () => {
         const { data } = this.state;
-        if(data.length==0) {
+        if (data.length == 0) {
             return <div>
-                <span style={{color:'grey'}}>Giỏ hàng trống </span>
+                <span style={{ color: 'grey' }}>Giỏ hàng trống </span>
             </div>
         }
         return data.map((e, i) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link, useRouteMatch, useParams, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import Constant from '../constant';
 
 class LoginScreen extends Component {
