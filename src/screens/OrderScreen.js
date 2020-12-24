@@ -43,13 +43,15 @@ class OrderScreen extends Component {
         return (
             data.map((e, i) => {
                 return (
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        marginTop: 8,
-                        backgroundColor: '#46A049',
-                        width: 500
-                    }}>
+                    <div
+                        key={e.id}
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            marginTop: 8,
+                            backgroundColor: '#46A049',
+                            width: 500
+                        }}>
                         <span>Mã đơn hàng: {e.id}</span>
                         <span>Ngày tạo: {e.date}</span>
                         <span style={{ color: '#BF081F' }}>Tổng tiền: {e.amount} VNĐ</span>
