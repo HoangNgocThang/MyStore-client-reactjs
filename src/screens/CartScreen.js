@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { useRouteMatch, useHistory } from "react-router-dom";
 import Constant from '../constant';
 import '../../src/assets/styles/carts.css';
+import moment from 'moment';
 
 class CartScreen extends Component {
 
@@ -160,12 +161,50 @@ class CartScreen extends Component {
         })
     }
 
+    onBuy = async () => {
+        try {
+            const params = {
+                data: this.state.data,
+                datetime: new Date
+            }
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
+            console.log(params, userPar);
+            const res = await Axios.post(`${Constant.BASE_URL}/order/create`, params, {
+                headers: {
+                    'Authorization': `Bearer ${userPar && userPar.access_token}`
+                }
+            });
+            if (res.data.status != 200) {
+                alert(res.data.message);
+                return;
+            }
+            console.log("onBuy:", res);
+            this.props.history.push("/");
+            setTimeout(() => { alert(res.data.message) }, 200)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     render() {
         console.log(this.state.user)
         return (
             <div>
                 <h1> Giỏ hàng </h1>
                 <span>Tài khoản: {this.state.user && this.state.user.username}</span>
+                <div
+                    onClick={this.onBuy}
+                    style={{
+                        marginTop: 10,
+                        marginBottom: 10,
+                        display: 'flex',
+                        justifyContent: 'center', alignContent: 'center',
+                        backgroundColor: 'orange', width: 100, padding: 10
+                    }}>
+                    <span>Mua hàng</span>
+                </div>
                 { this.renderListProduct()}
             </div>
         );
