@@ -189,6 +189,10 @@ class HomeScreen extends Component {
         this.props.history.push('/order');
     }
 
+    onClickAccount = () => {
+
+    }
+
     render() {
         return (
             <div>
@@ -217,6 +221,19 @@ class HomeScreen extends Component {
                         <img src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
                             style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                     </div>
+
+                    <div
+                        onClick={this.onClickAccount}
+                        style={{
+                            padding: 10,
+                            margin: 4,
+                            backgroundColor: 'blue'
+                        }}>
+                        {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</span>}
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
+                            style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                    </div>
+
                 </div>
 
                 <div style={{ position: 'fixed', right: 0 }}>

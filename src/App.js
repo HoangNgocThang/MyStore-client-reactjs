@@ -5,6 +5,7 @@ import BaseHomeScreen from "./screens/HomeScreen";
 import BaseLoginScreen from "./screens/LoginScreen";
 import BaseOrderScreen from "./screens/OrderScreen";
 import BaseRegisterScreen from "./screens/RegisterScreen";
+import BaseAccountScreen from './screens/AccountScreen';
 
 export default function App() {
   return (
@@ -22,6 +23,9 @@ export default function App() {
           </Route>
           <Route path="/order">
             <BaseOrderScreen />
+          </Route>
+          <Route path="/account">
+            <BaseAccountScreen />
           </Route>
           <Route path="/">
             <BaseHomeScreen />
