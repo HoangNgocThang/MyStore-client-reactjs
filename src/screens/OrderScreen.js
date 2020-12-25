@@ -53,7 +53,7 @@ class OrderScreen extends Component {
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
-                            marginTop: 8,
+                            marginTop: 15,
                             backgroundColor: 'yellow',
                             width: 500
                         }}>

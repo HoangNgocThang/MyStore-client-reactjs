@@ -190,7 +190,11 @@ class HomeScreen extends Component {
     }
 
     onClickAccount = () => {
-
+        if (this.state.user == null) {
+            alert('Vui lòng đăng nhập');
+            return;
+        }
+        this.props.history.push('/account');
     }
 
     render() {
