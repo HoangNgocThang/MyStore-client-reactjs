@@ -12,7 +12,8 @@ class HomeScreen extends Component {
             user: null,
             categoies: [],
             products: [],
-            total: 0
+            total: 0,
+            totalOrder: 0
         };
     }
 
@@ -21,6 +22,7 @@ class HomeScreen extends Component {
         this.getCategory();
         this.getProducts();
         this.getTotalItemInCart();
+        this.getTotalOrder();
     }
 
     getAuth = async () => {
@@ -63,9 +65,26 @@ class HomeScreen extends Component {
             this.setState({
                 total: res.data.total
             })
-
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    getTotalOrder = async () => {
+        try {
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
+            const res = await axios.get(`${Constant.BASE_URL}/order/total-order`, {
+                headers: {
+                    'Authorization': `Bearer ${userPar && userPar.access_token}`
+                }
+            })
+            console.log('getTotalOrder:', res);
+            this.setState({
+                totalOrder: res.data.total
+            });
+        } catch (e) {
+            console.log(e);
         }
     }
 
@@ -194,7 +213,7 @@ class HomeScreen extends Component {
                             margin: 4,
                             backgroundColor: 'green'
                         }}>
-                        <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Đơn hàng</span>
+                        {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</span>}
                         <img src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
                             style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                     </div>

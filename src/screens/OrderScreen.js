@@ -40,6 +40,11 @@ class OrderScreen extends Component {
 
     renderListOrder = () => {
         const { data } = this.state;
+        if (data.length == 0) {
+            return <div>
+                <span style={{ color: 'grey' }}>Đơn hàng trống</span>
+            </div>
+        }
         return (
             data.map((e, i) => {
                 return (
@@ -49,12 +54,22 @@ class OrderScreen extends Component {
                             display: 'flex',
                             flexDirection: 'column',
                             marginTop: 8,
-                            backgroundColor: '#46A049',
+                            backgroundColor: 'yellow',
                             width: 500
                         }}>
                         <span>Mã đơn hàng: {e.id}</span>
                         <span>Ngày tạo: {e.date}</span>
                         <span style={{ color: '#BF081F' }}>Tổng tiền: {e.amount} VNĐ</span>
+                        {
+                            e.items.map((ele, index) => {
+                                return <div
+                                    style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#46A049', marginTop: 8 }}
+                                    key={ele.id}>
+                                    <span>Tên sản phẩm: {ele.name}</span>
+                                    <span>Số lượng: {ele.quantity}</span>
+                                </div>
+                            })
+                        }
                     </div>
                 )
             })
