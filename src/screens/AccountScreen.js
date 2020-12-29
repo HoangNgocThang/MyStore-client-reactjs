@@ -10,6 +10,7 @@ class AccountScreen extends Component {
             name: '',
             phone: '',
             address: '',
+            avatarShow: '',
             avatar: null
         };
     }
@@ -34,7 +35,8 @@ class AccountScreen extends Component {
             this.setState({
                 name: res.data.data.name,
                 phone: res.data.data.phone,
-                address: res.data.data.address
+                address: res.data.data.address,
+                avatarShow: res.data.data.avatar
             })
 
         } catch (error) {
@@ -64,36 +66,44 @@ class AccountScreen extends Component {
     }
 
     onSave = async () => {
-        if (this.state.avatar !== null) {
-            try {
-                const user = await localStorage.getItem('user');
-                const userPar = JSON.parse(user);
-                
-                let formData = new FormData();
-                formData.append("name", this.state.name);
-                formData.append("phone", this.state.phone);
-                formData.append("address", this.state.address)
-                formData.append('avatar', this.state.avatar);
+        if (this.state.avatar == null) {
+            alert('Bạn chưa chọn ảnh');
+            return;
+        }
+        try {
+            const user = await localStorage.getItem('user');
+            const userPar = JSON.parse(user);
 
-                const res = await Axios.post(`${Constant.BASE_URL}/user/upload`,
-                    formData,
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${userPar && userPar.access_token}`,
-                            "Content-type": "multipart/form-data",
-                        },
-                    }
-                )
+            let formData = new FormData();
+            formData.append("name", this.state.name);
+            formData.append("phone", this.state.phone);
+            formData.append("address", this.state.address)
+            formData.append('avatar', this.state.avatar);
 
-                console.log(res);
-            } catch (error) {
-                console.log("loi:",error);
+            const res = await Axios.post(`${Constant.BASE_URL}/user/upload`,
+                formData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${userPar && userPar.access_token}`,
+                        "Content-type": "multipart/form-data",
+                    },
+                }
+            )
+
+            console.log(res);
+
+            if(res.data.status !=200) {
+                alert(res.data.message);
+                return;
             }
+            this.showUser();
+        } catch (error) {
+            console.log("loi:", error);
         }
     }
 
     render() {
-        const { name, phone, address } = this.state;
+        const { name, phone, address, avatarShow } = this.state;
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h1>Tài khoản</h1>
@@ -109,6 +119,7 @@ class AccountScreen extends Component {
 
                 <span>Phone:</span>
                 <input
+                    disabled
                     style={{ width: 200, marginTop: 10 }}
                     placeholder="phone"
                     id="phone"
@@ -126,6 +137,9 @@ class AccountScreen extends Component {
                 />
 
                 <span>Avtart:</span>
+                {
+                    avatarShow && <img src={`${Constant.BASE_URL}${avatarShow}`} style={{ width: 50, height: 50 }} />
+                }
                 <input
                     type="file"
                     style={{ width: 200, marginTop: 10 }}
@@ -133,8 +147,8 @@ class AccountScreen extends Component {
 
                 <div
                     onClick={this.onSave}
-                    style={{ width: 100, height: 30, backgroundColor: 'green', padding: 4, marginTop: 10 }}>
-                    <span>Lưu</span>
+                    style={{ backgroundColor: 'green', width: 70, padding: 4, marginTop: 10 }}>
+                    <span style={{ margin: 10, color: 'white' }}>Lưu</span>
                 </div>
             </div>
         );
