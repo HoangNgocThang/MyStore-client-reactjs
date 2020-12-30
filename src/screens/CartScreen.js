@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { useRouteMatch, useHistory } from "react-router-dom";
 import Constant from '../constant';
 import '../../src/assets/styles/carts.css';
-import moment from 'moment';
 
 class CartScreen extends Component {
 

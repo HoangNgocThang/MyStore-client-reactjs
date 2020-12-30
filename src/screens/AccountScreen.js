@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import Constant from '../constant';
-
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
 class AccountScreen extends Component {
 
     constructor(props) {
@@ -157,5 +157,7 @@ class AccountScreen extends Component {
 
 
 export default function BaseAccountScreen() {
-    return <AccountScreen />
+    let match = useRouteMatch();
+    const history = useHistory();
+    return <AccountScreen match={match.url} history={history} />
 };
