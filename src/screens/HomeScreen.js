@@ -110,11 +110,11 @@ class HomeScreen extends Component {
         return (
             categoies.map((e, i) => {
                 return (
-                    <div
-                        style={{ backgroundColor: '#C7EDFC' }}
+                    <li
+                        className="menu"
                         key={e.id} className="menu-item" onClick={() => this.handleClickItem(e)}>
-                        <span>{e.name}</span>
-                    </div>
+                        <li>{e.name}</li>
+                    </li>
                 )
             }))
     }
@@ -149,17 +149,17 @@ class HomeScreen extends Component {
         return (
             products.map((e, i) => {
                 return (
-                    <div className="product-item" key={e.id}>
-                        <img src={e.image} className="image-product" alt="product" />
-                        <span className="title-product">{e.name}</span>
-                        <span style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
-                        <div
-                            style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
-                            onClick={() => this.onAdd(e)}
-                        >
-                            <span style={{ color: 'white' }}>Thêm vào giỏ hàng</span>
-                        </div>
-                    </div>
+                    <li className="product-item" key={e.id}>
+                            <img src={e.image} className="image-product" alt="product" />
+                            <span className="title-product">{e.name}</span>
+                            <span style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
+                            <div
+                                style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
+                                onClick={() => this.onAdd(e)}
+                            >
+                                <span style={{ color: 'white' }}>Thêm vào giỏ hàng</span>
+                            </div>
+                    </li>
                 )
             })
         )
@@ -237,7 +237,6 @@ class HomeScreen extends Component {
                         <img src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
                             style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                     </div>
-
                 </div>
 
                 <div style={{ position: 'fixed', right: 0 }}>
@@ -276,12 +275,12 @@ class HomeScreen extends Component {
                             </Link>
                     }
                 </div>
-                <div className="menu">
+                <ul className="menu">
                     {this.renderMenu()}
-                </div>
-                <div className="products">
+                </ul>
+                <ul className="products">
                     {this.renderProducts()}
-                </div>
+                </ul>
             </div>
         );
     }

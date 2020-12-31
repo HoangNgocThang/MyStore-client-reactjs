@@ -46,33 +46,41 @@ class OrderScreen extends Component {
             </div>
         }
         return (
-            data.map((e, i) => {
-                return (
-                    <div
-                        key={e.id}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            marginTop: 15,
-                            backgroundColor: 'yellow',
-                            width: 500
-                        }}>
-                        <span>Mã đơn hàng: {e.id}</span>
-                        <span>Ngày tạo: {e.date}</span>
-                        <span style={{ color: '#BF081F' }}>Tổng tiền: {e.amount} VNĐ</span>
-                        {
-                            e.items.map((ele, index) => {
-                                return <div
-                                    style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#46A049', marginTop: 8 }}
-                                    key={ele.id}>
-                                    <span>Tên sản phẩm: {ele.name}</span>
-                                    <span>Số lượng: {ele.quantity}</span>
-                                </div>
-                            })
-                        }
-                    </div>
-                )
-            })
+            <ul>
+                {
+                    data.map((e, i) => {
+                        return (
+                            <li
+                                key={e.id}
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    marginTop: 15,
+                                    backgroundColor: 'yellow',
+                                    width: 500
+                                }}>
+                                <span>Mã đơn hàng: {e.id}</span>
+                                <span>Ngày tạo: {e.date}</span>
+                                <span style={{ color: '#BF081F' }}>Tổng tiền: {e.amount} VNĐ</span>
+                                {
+                                    <ul>
+                                        {e.items.map((ele, index) => {
+                                            return <li
+                                                style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#46A049', marginTop: 8 }}
+                                                key={ele.id}>
+                                                <span>Tên sản phẩm: {ele.name}</span>
+                                                <span>Số lượng: {ele.quantity}</span>
+                                            </li>
+                                        })}
+                                    </ul>
+
+                                }
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+
         )
     }
 

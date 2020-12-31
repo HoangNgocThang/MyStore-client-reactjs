@@ -2,12 +2,15 @@
 .menu {
     display: flex;
     flex-direction: row;
+   
 }
 
 .menu-item {
+    list-style-type: none;
     margin:20px;
     border: 1px solid black;
     padding: 10px;
+    background-color: #C7EDFC;
 }
 
 .products {
@@ -24,6 +27,13 @@
     border: 1px solid black;
 }
 
+.product-item-li {
+    display: flex;
+    flex-direction: column;
+    margin:8px;
+    padding:5px;
+}
+
 .image-product {
     width: auto;
     height: 150px;
@@ -31,8 +41,11 @@
 }
 
 .title-product {
-    
     font-weight: bold;
     margin-top: 10px;
     color: blue;
+}
+
+.category {
+  
 }

@@ -6,12 +6,16 @@ import BaseLoginScreen from "./screens/LoginScreen";
 import BaseOrderScreen from "./screens/OrderScreen";
 import BaseRegisterScreen from "./screens/RegisterScreen";
 import BaseAccountScreen from './screens/AccountScreen';
+import BaseTestScreen from "./screens/TestScreen";
 
 export default function App() {
   return (
     <Router>
-      <div>
+      <div className="App">
         <Switch>
+          <Route path="/test">
+            <BaseTestScreen />
+          </Route>
           <Route path="/login">
             <BaseLoginScreen />
           </Route>
