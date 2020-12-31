@@ -150,15 +150,15 @@ class HomeScreen extends Component {
             products.map((e, i) => {
                 return (
                     <li className="product-item" key={e.id}>
-                            <img src={e.image} className="image-product" alt="product" />
-                            <span className="title-product">{e.name}</span>
-                            <span style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
-                            <div
-                                style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
-                                onClick={() => this.onAdd(e)}
-                            >
-                                <span style={{ color: 'white' }}>Thêm vào giỏ hàng</span>
-                            </div>
+                        <img src={e.image} className="image-product" alt="product" />
+                        <span className="title-product">{e.name}</span>
+                        <span style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
+                        <div
+                            style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
+                            onClick={() => this.onAdd(e)}
+                        >
+                            <span style={{ color: 'white' }}>Thêm vào giỏ hàng</span>
+                        </div>
                     </li>
                 )
             })
@@ -201,79 +201,81 @@ class HomeScreen extends Component {
         return (
             <div>
                 <h1>Trang chủ</h1>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <div
-                        onClick={this.onClickCart}
-                        style={{
-                            padding: 10,
-                            margin: 4,
-                            backgroundColor: 'yellow',
-                        }}>
-                        {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</span>}
-                        <img src="https://www.flaticon.com/svg/static/icons/svg/833/833314.svg"
-                            style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                            onClick={this.onClickCart}
+                            style={{
+                                padding: 10,
+                                margin: 4,
+                                backgroundColor: 'yellow',
+                            }}>
+                            {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</span>}
+                            <img src="https://www.flaticon.com/svg/static/icons/svg/833/833314.svg"
+                                style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                        </div>
+                        <div
+                            onClick={this.onClickOrder}
+                            style={{
+                                padding: 10,
+                                margin: 4,
+                                backgroundColor: 'green'
+                            }}>
+                            {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</span>}
+                            <img src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
+                                style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                        </div>
+                        <div
+                            onClick={this.onClickAccount}
+                            style={{
+                                padding: 10,
+                                margin: 4,
+                                backgroundColor: 'blue'
+                            }}>
+                            {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</span>}
+                            <img src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
+                                style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                        </div>
                     </div>
 
-                    <div
-                        onClick={this.onClickOrder}
-                        style={{
-                            padding: 10,
-                            margin: 4,
-                            backgroundColor: 'green'
-                        }}>
-                        {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</span>}
-                        <img src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
-                            style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                    <div style={{ display: 'flex' }}>
+                        {
+                            this.state.user ?
+                                <span>
+                                    <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span>
+                                    <div
+                                        onClick={this.logout}
+                                        style={{
+                                            margin: 4,
+                                            padding: 10,
+                                            backgroundColor: 'pink'
+                                        }}>
+                                        <span>Đăng xuất</span>
+                                    </div>
+                                </span>
+                                :
+                                <>
+                                    <Link
+                                        to={'/login'}
+                                        style={{
+                                            padding: 10,
+                                            margin: 4,
+                                            backgroundColor: 'yellow'
+                                        }}>
+                                        <span>Đăng nhập</span>
+                                    </Link>
+                                    <Link
+                                        to={'/register'}
+                                        style={{
+                                            margin: 4,
+                                            padding: 10,
+                                            backgroundColor: 'green'
+                                        }}>
+                                        <span>Đăng ký</span>
+                                    </Link>
+                                </>
+                        }
                     </div>
-
-                    <div
-                        onClick={this.onClickAccount}
-                        style={{
-                            padding: 10,
-                            margin: 4,
-                            backgroundColor: 'blue'
-                        }}>
-                        {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</span>}
-                        <img src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
-                            style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
-                    </div>
-                </div>
-
-                <div style={{ position: 'fixed', right: 0 }}>
-                    {
-                        this.state.user ?
-                            <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span> :
-                            <Link
-                                to={'/login'}
-                                style={{
-                                    padding: 10,
-                                    margin: 4,
-                                    backgroundColor: 'yellow'
-                                }}>
-                                <span>Đăng nhập</span>
-                            </Link>
-                    }
-                    {
-                        this.state.user ?
-                            <div
-                                onClick={this.logout}
-                                style={{
-                                    margin: 4,
-                                    padding: 10,
-                                    backgroundColor: 'pink'
-                                }}>
-                                <span>Đăng xuất</span>
-                            </div> :
-                            <Link
-                                to={'/register'}
-                                style={{
-                                    margin: 4,
-                                    padding: 10,
-                                    backgroundColor: 'green'
-                                }}>
-                                <span>Đăng ký</span>
-                            </Link>
-                    }
                 </div>
                 <ul className="menu">
                     {this.renderMenu()}

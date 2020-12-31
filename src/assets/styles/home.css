@@ -2,12 +2,11 @@
 .menu {
     display: flex;
     flex-direction: row;
-   
 }
 
 .menu-item {
     list-style-type: none;
-    margin:20px;
+    margin:10px;
     border: 1px solid black;
     padding: 10px;
     background-color: #C7EDFC;
@@ -44,8 +43,4 @@
     font-weight: bold;
     margin-top: 10px;
     color: blue;
-}
-
-.category {
-  
 }
