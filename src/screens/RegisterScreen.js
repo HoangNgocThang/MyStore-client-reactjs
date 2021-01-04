@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
-import { useRouteMatch, useParams, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import Constant from '../constant';
 
 class RegisterScreen extends Component {
@@ -38,27 +38,27 @@ class RegisterScreen extends Component {
     validate = () => {
         const { username, password, name, phone, address } = this.state;
 
-        if (username == '') {
+        if (username === '') {
             alert('username không đc bỏ trống');
             return false;
         }
 
-        if (password == '') {
+        if (password === '') {
             alert('password không đc bỏ trống');
             return false;
         }
 
-        if (name == '') {
+        if (name === '') {
             alert('name không đc bỏ trống');
             return false;
         }
 
-        if (phone == '') {
+        if (phone === '') {
             alert('phone không đc bỏ trống');
             return false;
         }
 
-        if (address == '') {
+        if (address === '') {
             alert('address không đc bỏ trống');
             return false;
         }
@@ -79,7 +79,7 @@ class RegisterScreen extends Component {
                 }
                 const res = await Axios.post(`${Constant.BASE_URL}/api/register`, params);
                 console.log("Dangki:", res);
-                if (res.data.status != 200) {
+                if (res.data.status !== 200) {
                     setTimeout(() => { alert(res.data.message) }, 250);
                     return;
                 }

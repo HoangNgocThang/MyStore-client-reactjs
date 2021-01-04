@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../../src/assets/styles/home.css';
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
 import Constant from '../constant';
+import ItemProduct from '../components/ItemProduct';
+import ItemMenu from '../components/ItemMenu';
 
 class HomeScreen extends Component {
 
@@ -110,11 +112,7 @@ class HomeScreen extends Component {
         return (
             categoies.map((e, i) => {
                 return (
-                    <li
-                        className="menu"
-                        key={e.id} className="menu-item" onClick={() => this.handleClickItem(e)}>
-                        <li>{e.name}</li>
-                    </li>
+                    <ItemMenu key={e.id} item={e} handleClickItem={this.handleClickItem} />
                 )
             }))
     }
@@ -149,17 +147,7 @@ class HomeScreen extends Component {
         return (
             products.map((e, i) => {
                 return (
-                    <li className="product-item" key={e.id}>
-                        <img src={e.image} className="image-product" alt={e.name} />
-                        <p className="title-product">{e.name}</p>
-                        <p style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</p>
-                        <div
-                            style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
-                            onClick={() => this.onAdd(e)}
-                        >
-                            <p style={{ color: 'white' }}>Thêm vào giỏ hàng</p>
-                        </div>
-                    </li>
+                    <ItemProduct item={e} onAdd={this.onAdd} key={e.id} />
                 )
             })
         )
@@ -253,8 +241,8 @@ class HomeScreen extends Component {
                     <div style={{ display: 'flex' }}>
                         {
                             this.state.user ?
-                                <p>
-                                    <p style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</p>
+                                <div>
+                                    <div style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</div>
                                     <div
                                         onClick={this.logout}
                                         style={{
@@ -262,9 +250,9 @@ class HomeScreen extends Component {
                                             padding: 10,
                                             backgroundColor: 'pink'
                                         }}>
-                                        <p>Đăng xuất</p>
+                                        <div style={{ fontWeight: 'bold' }}>Đăng xuất</div>
                                     </div>
-                                </p>
+                                </div>
                                 :
                                 <>
                                     <Link
@@ -274,7 +262,7 @@ class HomeScreen extends Component {
                                             margin: 4,
                                             backgroundColor: 'yellow'
                                         }}>
-                                        <p>Đăng nhập</p>
+                                        <div>Đăng nhập</div>
                                     </Link>
                                     <Link
                                         to={'/register'}
@@ -283,7 +271,7 @@ class HomeScreen extends Component {
                                             padding: 10,
                                             backgroundColor: 'green'
                                         }}>
-                                        <p>Đăng ký</p>
+                                        <div>Đăng ký</div>
                                     </Link>
                                 </>
                         }

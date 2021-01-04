@@ -1,0 +1,20 @@
+.product-item {
+    display: flex;
+    flex-direction: column;
+    margin:8px;
+    padding:5px;
+    border: 1px solid black;
+}
+
+.image-product {
+    align-self: center;
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.title-product {
+    font-weight: bold;
+    margin-top: 10px;
+    color: blue;
+}

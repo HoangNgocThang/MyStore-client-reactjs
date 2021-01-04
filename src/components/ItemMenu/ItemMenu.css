@@ -1,0 +1,13 @@
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-item {
+    list-style-type: none;
+    margin:10px;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #C7EDFC;
+}

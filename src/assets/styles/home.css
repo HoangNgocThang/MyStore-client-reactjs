@@ -1,29 +1,9 @@
 
-.menu {
-    display: flex;
-    flex-direction: row;
-}
-
-.menu-item {
-    list-style-type: none;
-    margin:10px;
-    border: 1px solid black;
-    padding: 10px;
-    background-color: #C7EDFC;
-}
 
 .products {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-.product-item {
-    display: flex;
-    flex-direction: column;
-    margin:8px;
-    padding:5px;
-    border: 1px solid black;
 }
 
 .product-item-li {
@@ -33,14 +13,3 @@
     padding:5px;
 }
 
-.image-product {
-    width: auto;
-    height: 150px;
-    object-fit: contain;
-}
-
-.title-product {
-    font-weight: bold;
-    margin-top: 10px;
-    color: blue;
-}
