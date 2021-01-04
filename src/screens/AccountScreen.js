@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import Constant from '../constant';
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
+
 class AccountScreen extends Component {
 
     constructor(props) {
@@ -65,40 +66,52 @@ class AccountScreen extends Component {
         })
     }
 
-    onSave = async () => {
-        if (this.state.avatar == null) {
-            alert('Bạn chưa chọn ảnh');
-            return;
+    validate = () => {
+        if (this.state.name == '' || this.state.name == null) {
+            return false;
         }
-        try {
-            const user = await localStorage.getItem('user');
-            const userPar = JSON.parse(user);
 
-            let formData = new FormData();
-            formData.append("name", this.state.name);
-            formData.append("phone", this.state.phone);
-            formData.append("address", this.state.address)
-            formData.append('avatar', this.state.avatar);
+        if (this.state.address == '' || this.state.address == null) {
+            return false;
+        }
 
-            const res = await Axios.post(`${Constant.BASE_URL}/user/upload`,
-                formData,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${userPar && userPar.access_token}`,
-                        "Content-type": "multipart/form-data",
-                    },
+        return true;
+    }
+
+    onSave = async () => {
+        console.log(this.state.avatar);
+        if (this.validate) {
+            try {
+                const user = await localStorage.getItem('user');
+                const userPar = JSON.parse(user);
+
+                let formData = new FormData();
+                formData.append("name", this.state.name);
+                formData.append("phone", this.state.phone);
+                formData.append("address", this.state.address)
+                formData.append('avatar', this.state.avatar);
+                formData.append('avatarShow', this.state.avatarShow);
+
+                const res = await Axios.post(`${Constant.BASE_URL}/user/upload`,
+                    formData,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${userPar && userPar.access_token}`,
+                            "Content-type": "multipart/form-data",
+                        },
+                    }
+                )
+
+                console.log(res);
+
+                if (res.data.status != 200) {
+                    alert(res.data.message);
+                    return;
                 }
-            )
-
-            console.log(res);
-
-            if (res.data.status != 200) {
-                alert(res.data.message);
-                return;
+                this.showUser();
+            } catch (error) {
+                console.log("loi:", error);
             }
-            this.showUser();
-        } catch (error) {
-            console.log("loi:", error);
         }
     }
 
@@ -138,7 +151,11 @@ class AccountScreen extends Component {
 
                 <p>Avtart:</p>
                 {
-                    avatarShow && <img src={`${Constant.BASE_URL}${avatarShow}`} style={{ width: 50, height: 50 }} />
+                    avatarShow && <img src={`${Constant.BASE_URL}${avatarShow}`}
+                        style={{
+                            objectFit: 'cover',
+                            width: 250, height: 250, marginTop: 10
+                        }} />
                 }
                 <input
                     type="file"
