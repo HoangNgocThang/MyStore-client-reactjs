@@ -160,7 +160,7 @@ class CartScreen extends Component {
     }
 
     onBuy = async () => {
-        if (this.state.data) {
+        if (this.state.data && this.state.data.length <= 0) {
             alert('Giỏ hàng trống vui lòng chọn ít nhất 1 sản phầm để tiếp tục');
             return;
         }
