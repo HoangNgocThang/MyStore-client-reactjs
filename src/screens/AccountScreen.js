@@ -92,7 +92,7 @@ class AccountScreen extends Component {
 
             console.log(res);
 
-            if(res.data.status !=200) {
+            if (res.data.status != 200) {
                 alert(res.data.message);
                 return;
             }
@@ -108,7 +108,7 @@ class AccountScreen extends Component {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h1>Tài khoản</h1>
 
-                <span>Name:</span>
+                <p>Name:</p>
                 <input
                     style={{ width: 200, marginTop: 10 }}
                     placeholder="name"
@@ -117,7 +117,7 @@ class AccountScreen extends Component {
                     value={name}
                 />
 
-                <span>Phone:</span>
+                <p>Phone:</p>
                 <input
                     disabled
                     style={{ width: 200, marginTop: 10 }}
@@ -127,7 +127,7 @@ class AccountScreen extends Component {
                     value={phone}
                 />
 
-                <span>Address:</span>
+                <p>Address:</p>
                 <input
                     style={{ width: 200, marginTop: 10 }}
                     placeholder="address"
@@ -136,7 +136,7 @@ class AccountScreen extends Component {
                     value={address}
                 />
 
-                <span>Avtart:</span>
+                <p>Avtart:</p>
                 {
                     avatarShow && <img src={`${Constant.BASE_URL}${avatarShow}`} style={{ width: 50, height: 50 }} />
                 }
@@ -148,7 +148,7 @@ class AccountScreen extends Component {
                 <div
                     onClick={this.onSave}
                     style={{ backgroundColor: 'green', width: 70, padding: 4, marginTop: 10 }}>
-                    <span style={{ margin: 10, color: 'white' }}>Lưu</span>
+                    <p style={{ margin: 10, color: 'white' }}>Lưu</p>
                 </div>
             </div>
         );

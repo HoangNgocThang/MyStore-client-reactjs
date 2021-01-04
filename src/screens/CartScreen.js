@@ -115,18 +115,17 @@ class CartScreen extends Component {
         const { data } = this.state;
         if (data.length == 0) {
             return <div>
-                <span style={{ color: 'grey' }}>Giỏ hàng trống </span>
+                <p style={{ color: 'grey' }}>Giỏ hàng trống </p>
             </div>
         }
         return data.map((e, i) => {
             return (
                 <div key={e.id_product} className="item-cart">
-                    <img src={e.image} alt={"product"} style={{ width: 100, height: 100 }} />
-
+                    <img src={e.image} alt={e.name} style={{ width: 100, height: 100 }} />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span>{e.name}</span>
-                        <span style={{ color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
-                        <span>Số lượng: {e.quantity}</span>
+                        <p>{e.name}</p>
+                        <p style={{ color: '#BF081F' }}>Giá: {e.price} VNĐ</p>
+                        <p>Số lượng: {e.quantity}</p>
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
@@ -134,7 +133,7 @@ class CartScreen extends Component {
                             }}
                                 onClick={() => this.onIncrease(e)}
                             >
-                                <span style={{ color: 'white', fontSize: 16 }}>+</span>
+                                <p style={{ color: 'white', fontSize: 16 }}>+</p>
                             </div>
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
@@ -142,7 +141,7 @@ class CartScreen extends Component {
                             }}
                                 onClick={() => this.onDecrease(e)}
                             >
-                                <span style={{ color: 'white', fontSize: 16 }}>-</span>
+                                <p style={{ color: 'white', fontSize: 16 }}>-</p>
                             </div>
 
                             <div style={{
@@ -151,7 +150,7 @@ class CartScreen extends Component {
                             }}
                                 onClick={() => this.onRemove(e)}
                             >
-                                <span style={{ color: 'white', fontSize: 16 }}>X</span>
+                                <p style={{ color: 'white', fontSize: 16 }}>X</p>
                             </div>
                         </div>
                     </div>
@@ -161,7 +160,7 @@ class CartScreen extends Component {
     }
 
     onBuy = async () => {
-        if(this.state.data) {
+        if (this.state.data) {
             alert('Giỏ hàng trống vui lòng chọn ít nhất 1 sản phầm để tiếp tục');
             return;
         }
@@ -196,7 +195,7 @@ class CartScreen extends Component {
         return (
             <div>
                 <h1> Giỏ hàng </h1>
-                <span>Tài khoản: {this.state.user && this.state.user.username}</span>
+                <p>Tài khoản: {this.state.user && this.state.user.username}</p>
                 <div
                     onClick={this.onBuy}
                     style={{
@@ -206,7 +205,7 @@ class CartScreen extends Component {
                         justifyContent: 'center', alignContent: 'center',
                         backgroundColor: 'orange', width: 100, padding: 10
                     }}>
-                    <span>Mua hàng</span>
+                    <p>Mua hàng</p>
                 </div>
                 { this.renderListProduct()}
             </div>

@@ -150,7 +150,7 @@ class RegisterScreen extends Component {
                         backgroundColor: '#42ABE1'
                     }}
                     onClick={this.onRegister}>
-                    <span> Đăng ký </span>
+                    <p> Đăng ký </p>
                 </div>
 
             </div>

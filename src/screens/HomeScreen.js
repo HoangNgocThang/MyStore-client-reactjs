@@ -150,14 +150,14 @@ class HomeScreen extends Component {
             products.map((e, i) => {
                 return (
                     <li className="product-item" key={e.id}>
-                        <img src={e.image} className="image-product" alt="product" />
-                        <span className="title-product">{e.name}</span>
-                        <span style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</span>
+                        <img src={e.image} className="image-product" alt={e.name} />
+                        <p className="title-product">{e.name}</p>
+                        <p style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F' }}>Giá: {e.price} VNĐ</p>
                         <div
                             style={{ marginTop: 10, alignSelf: 'center', backgroundColor: '#46A049', padding: 8 }}
                             onClick={() => this.onAdd(e)}
                         >
-                            <span style={{ color: 'white' }}>Thêm vào giỏ hàng</span>
+                            <p style={{ color: 'white' }}>Thêm vào giỏ hàng</p>
                         </div>
                     </li>
                 )
@@ -210,8 +210,10 @@ class HomeScreen extends Component {
                                 margin: 4,
                                 backgroundColor: 'yellow',
                             }}>
-                            {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</span>}
-                            <img src="https://www.flaticon.com/svg/static/icons/svg/833/833314.svg"
+                            {this.state.user && <p style={{ fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</p>}
+                            <img
+                                alt={"icon_product"}
+                                src="https://www.flaticon.com/svg/static/icons/svg/833/833314.svg"
                                 style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                         </div>
                         <div
@@ -221,8 +223,10 @@ class HomeScreen extends Component {
                                 margin: 4,
                                 backgroundColor: 'green'
                             }}>
-                            {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</span>}
-                            <img src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
+                            {this.state.user && <p style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</p>}
+                            <img
+                                alt={"icon_order"}
+                                src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
                                 style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                         </div>
                         <div
@@ -232,8 +236,10 @@ class HomeScreen extends Component {
                                 margin: 4,
                                 backgroundColor: 'blue'
                             }}>
-                            {this.state.user && <span style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</span>}
-                            <img src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
+                            {this.state.user && <p style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</p>}
+                            <img
+                                alt={"icon_account"}
+                                src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
                                 style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                         </div>
                     </div>
@@ -241,8 +247,8 @@ class HomeScreen extends Component {
                     <div style={{ display: 'flex' }}>
                         {
                             this.state.user ?
-                                <span>
-                                    <span style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</span>
+                                <p>
+                                    <p style={{ fontWeight: 'bold' }}>Hello {this.state.user.username}</p>
                                     <div
                                         onClick={this.logout}
                                         style={{
@@ -250,9 +256,9 @@ class HomeScreen extends Component {
                                             padding: 10,
                                             backgroundColor: 'pink'
                                         }}>
-                                        <span>Đăng xuất</span>
+                                        <p>Đăng xuất</p>
                                     </div>
-                                </span>
+                                </p>
                                 :
                                 <>
                                     <Link
@@ -262,7 +268,7 @@ class HomeScreen extends Component {
                                             margin: 4,
                                             backgroundColor: 'yellow'
                                         }}>
-                                        <span>Đăng nhập</span>
+                                        <p>Đăng nhập</p>
                                     </Link>
                                     <Link
                                         to={'/register'}
@@ -271,7 +277,7 @@ class HomeScreen extends Component {
                                             padding: 10,
                                             backgroundColor: 'green'
                                         }}>
-                                        <span>Đăng ký</span>
+                                        <p>Đăng ký</p>
                                     </Link>
                                 </>
                         }

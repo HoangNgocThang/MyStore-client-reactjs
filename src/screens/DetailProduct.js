@@ -10,7 +10,7 @@ class DetailProduct extends Component {
     render() {
         return (
             <div>
-                <span> DetailProduct </span>
+                <p> DetailProduct </p>
             </div>
         );
     }

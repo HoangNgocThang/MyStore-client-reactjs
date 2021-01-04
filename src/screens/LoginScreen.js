@@ -91,7 +91,7 @@ class LoginScreen extends Component {
                         backgroundColor: '#42ABE1'
                     }}
                     onClick={this.onLogin}>
-                    <span> Đăng nhập </span>
+                    <p> Đăng nhập </p>
                 </div>
 
             </div>
