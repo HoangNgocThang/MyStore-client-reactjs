@@ -206,41 +206,47 @@ class HomeScreen extends Component {
                         <div
                             onClick={this.onClickCart}
                             style={{
+                                display: 'flex',
+                                flexDirection: 'row',
                                 padding: 10,
                                 margin: 4,
                                 backgroundColor: 'yellow',
                             }}>
-                            {this.state.user && <p style={{ fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</p>}
+                            {this.state.user && <p style={{ alignSelf: 'center', fontSize: 16, fontWeight: 'bold', color: 'red' }}>Hiện có {this.state.total} sản phẩm</p>}
                             <img
                                 alt={"icon_product"}
                                 src="https://www.flaticon.com/svg/static/icons/svg/833/833314.svg"
-                                style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                                style={{ alignSelf: 'center', width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                         </div>
                         <div
                             onClick={this.onClickOrder}
                             style={{
+                                display: 'flex',
+                                flexDirection: 'row',
                                 padding: 10,
                                 margin: 4,
                                 backgroundColor: 'green'
                             }}>
-                            {this.state.user && <p style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</p>}
+                            {this.state.user && <p style={{ alignSelf: 'center', fontSize: 16, fontWeight: 'bold', color: 'white' }}>Hiện có {this.state.totalOrder} đơn hàng</p>}
                             <img
                                 alt={"icon_order"}
                                 src="https://www.flaticon.com/svg/static/icons/svg/3144/3144422.svg"
-                                style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                                style={{ alignSelf: 'center', width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                         </div>
                         <div
                             onClick={this.onClickAccount}
                             style={{
+                                display: 'flex',
+                                flexDirection: 'row',
                                 padding: 10,
                                 margin: 4,
                                 backgroundColor: 'blue'
                             }}>
-                            {this.state.user && <p style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</p>}
+                            {this.state.user && <p style={{ alignSelf: 'center', fontSize: 16, fontWeight: 'bold', color: 'white' }}>Tài khoản</p>}
                             <img
                                 alt={"icon_account"}
                                 src="https://www.flaticon.com/svg/static/icons/svg/2521/2521782.svg"
-                                style={{ width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
+                                style={{ alignSelf: 'center', width: 24, height: 24, objectFit: 'contain', marginLeft: 4 }} />
                         </div>
                     </div>
 
