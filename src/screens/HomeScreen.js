@@ -91,8 +91,9 @@ class HomeScreen extends Component {
     }
 
     handleClickItem = (e) => {
+        console.log('e:', e)
         if (e.id == 4) {
-            this.getProducts();
+           this.getProducts();
             return;
         }
         this.getProductsBySlug(e.slug);
@@ -101,6 +102,7 @@ class HomeScreen extends Component {
     getProductsBySlug = async (slug) => {
         try {
             const res = await axios.get(`${Constant.BASE_URL}/products/show/${slug}`);
+            console.log('res1111:',res)
             this.setState({ products: res.data.data });
         } catch (error) {
             console.log(error);
