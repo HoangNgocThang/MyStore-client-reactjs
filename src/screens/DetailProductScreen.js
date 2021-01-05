@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DetailProduct extends Component {
+class DetailProductScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,12 +10,13 @@ class DetailProduct extends Component {
     render() {
         return (
             <div>
+                <h1>Chi tiết sản phẩm</h1>
                 <p> DetailProduct </p>
             </div>
         );
     }
 }
 
-export default function DetailProduct() {
-    return <DetailProduct />
+export default function BaseDetailProductScreen() {
+    return <DetailProductScreen />
 }
