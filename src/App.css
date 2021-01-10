@@ -1,0 +1,11 @@
+.header-root {
+  border: 1px solid black;
+  height: 56px;
+  width: '100%';
+}
+
+.footer-root {
+  border: 1px solid black;
+  height: 56px;
+  width: '100%';
+}
