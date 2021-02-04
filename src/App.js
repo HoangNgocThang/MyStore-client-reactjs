@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import BaseCartScreen from "./screens/CartScreen";
 import BaseHomeScreen from "./screens/HomeScreen";
 import BaseLoginScreen from "./screens/LoginScreen";
@@ -8,12 +8,17 @@ import BaseRegisterScreen from "./screens/RegisterScreen";
 import BaseAccountScreen from './screens/AccountScreen';
 import BaseTestScreen from "./screens/TestScreen";
 import BaseDetailProductScreen from "./screens/DetailProductScreen";
-
+import './App.css';
 
 export default function App() {
   return (
     <Router>
       <div className="App">
+
+        <div className="header-root">
+          <p>Header</p>
+        </div>
+
         <Switch>
           <Route path="/:slugCategory/:slugProduct/:idProduct">
             <BaseDetailProductScreen />
@@ -40,6 +45,7 @@ export default function App() {
             <BaseHomeScreen />
           </Route>
         </Switch>
+
       </div>
     </Router>
   );

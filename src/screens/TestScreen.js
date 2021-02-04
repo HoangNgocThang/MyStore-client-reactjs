@@ -34,8 +34,12 @@ class TestScreen extends Component {
                 </section>
 
                 <footer>
-                    <p>Footer</p>
+                    <h2>Cities</h2>
                 </footer>
+
+                <div className="footer-root">
+                    <p>footer</p>
+                </div>
 
             </div>
         );
@@ -44,4 +48,5 @@ class TestScreen extends Component {
 
 export default function BaseTestScreen() {
     return <TestScreen />
+
 } 
