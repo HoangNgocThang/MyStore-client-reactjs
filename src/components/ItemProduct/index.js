@@ -6,10 +6,11 @@ class ItemProduct extends PureComponent {
 
     render() {
         const { item, onAdd } = this.props;
+
         return (
             <li className="product-item">
                 <img src={item.image} className="image-product" alt={item.name} />
-                <Link to={`/${item.slug_category}/${item.slug}`}>
+                <Link to={`/${item.slug_category}/${item.slug}/${item.id}`}>
                     <p className="title-product">{item.name}</p>
                 </Link>
                 <p style={{ alignSelf: 'center', marginTop: 10, color: '#BF081F', fontWeight: 'bold' }}>Giá: {item.price} VNĐ</p>

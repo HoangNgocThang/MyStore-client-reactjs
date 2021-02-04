@@ -148,11 +148,7 @@ class HomeScreen extends Component {
         return (
             products.map((e, i) => {
                 return (
-                    <ItemProduct
-                        item={e}
-                        onAdd={this.onAdd}
-                        key={e.id}
-                        onShowDetail={this.onShowDetail} />
+                    <ItemProduct item={e} onAdd={this.onAdd} key={e.id} />
                 )
             })
         )

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route ,  useRouteMatch,} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BaseCartScreen from "./screens/CartScreen";
 import BaseHomeScreen from "./screens/HomeScreen";
 import BaseLoginScreen from "./screens/LoginScreen";
@@ -11,16 +11,15 @@ import BaseDetailProductScreen from "./screens/DetailProductScreen";
 
 
 export default function App() {
-  //let match = useRouteMatch();
   return (
     <Router>
       <div className="App">
         <Switch>
-         <Route path="/:slugCategory/:slugProduct">
+          <Route path="/:slugCategory/:slugProduct/:idProduct">
             <BaseDetailProductScreen />
           </Route>
           <Route path="/test">
-            <BaseTestScreen/>
+            <BaseTestScreen />
           </Route>
           <Route path="/login">
             <BaseLoginScreen />
