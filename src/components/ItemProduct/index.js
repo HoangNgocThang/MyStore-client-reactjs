@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './ItemProduct.css';
 
 class ItemProduct extends PureComponent {
@@ -9,7 +10,8 @@ class ItemProduct extends PureComponent {
 
         return (
             <li className="product-item">
-                <img src={item.image} className="image-product" alt={item.name} />
+                {/* <img src={item.image} className="image-product" alt={item.name} /> */}
+                <LazyLoadImage alt={item.name} height={180} src={item.image} width={180} style={{alignSelf:'center'}}/>
                 <Link to={`/${item.slug_category}/${item.slug}/${item.id}`}>
                     <p className="title-product">{item.name}</p>
                 </Link>

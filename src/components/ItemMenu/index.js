@@ -6,7 +6,7 @@ class ItemMenu extends PureComponent {
         const { item, handleClickItem } = this.props;
         return (
             <li className="menu-item" onClick={() => handleClickItem(item)}>
-                <p style={{ fontWeight: 'bold' }}>{item.name}</p>
+                <p style={{ fontWeight: 'bold', margin: 0 }}>{item.name}</p>
             </li>
         );
     }
