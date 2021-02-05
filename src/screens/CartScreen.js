@@ -129,24 +129,33 @@ class CartScreen extends Component {
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
-                                padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'green'
+                                padding: 10,
+                                margin: 10,
+                                backgroundColor: 'green',
+                                height: 45
                             }}
                                 onClick={() => this.onIncrease(e)}
                             >
-                                <p style={{ color: 'white', fontSize: 16 }}>+</p>
+                                <p style={{ color: 'white', fontSize: 16, margin: 0 }}>+</p>
                             </div>
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
-                                padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'green'
+                                padding: 10,
+                                margin: 10,
+                                backgroundColor: 'green',
+                                height: 45
                             }}
                                 onClick={() => this.onDecrease(e)}
                             >
-                                <p style={{ color: 'white', fontSize: 16 }}>-</p>
+                                <p style={{ color: 'white', fontSize: 16, margin: 0 }}>-</p>
                             </div>
 
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignContent: 'center',
-                                padding: 10, margin: 10, width: 24, height: 24, backgroundColor: 'red'
+                                padding: 10,
+                                margin: 10,
+                                backgroundColor: 'red',
+                                height: 45
                             }}
                                 onClick={() => this.onRemove(e)}
                             >
@@ -205,7 +214,7 @@ class CartScreen extends Component {
                         justifyContent: 'center', alignContent: 'center',
                         backgroundColor: 'orange', width: 100, padding: 10
                     }}>
-                    <p>Mua hàng</p>
+                    <p style={{ margin: 0 }}>Mua hàng</p>
                 </div>
                 { this.renderListProduct()}
             </div>

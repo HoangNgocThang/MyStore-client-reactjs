@@ -121,7 +121,7 @@ class AccountScreen extends Component {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h1>Tài khoản</h1>
 
-                <p>Name:</p>
+                <p style={{ margin: 0 }}>Name:</p>
                 <input
                     style={{ width: 200, marginTop: 10 }}
                     placeholder="name"
@@ -130,7 +130,7 @@ class AccountScreen extends Component {
                     value={name}
                 />
 
-                <p>Phone:</p>
+                <p style={{ margin: 0 }}>Phone:</p>
                 <input
                     disabled
                     style={{ width: 200, marginTop: 10 }}
@@ -140,7 +140,7 @@ class AccountScreen extends Component {
                     value={phone}
                 />
 
-                <p>Address:</p>
+                <p style={{ margin: 0 }}>Address:</p>
                 <input
                     style={{ width: 200, marginTop: 10 }}
                     placeholder="address"
@@ -149,7 +149,7 @@ class AccountScreen extends Component {
                     value={address}
                 />
 
-                <p>Avtart:</p>
+                <p style={{ margin: 0 }}>Avtart:</p>
                 {
                     avatarShow && <img src={`${Constant.BASE_URL}${avatarShow}`}
                         style={{
@@ -165,7 +165,7 @@ class AccountScreen extends Component {
                 <div
                     onClick={this.onSave}
                     style={{ backgroundColor: 'green', width: 70, padding: 4, marginTop: 10 }}>
-                    <p style={{ margin: 10, color: 'white' }}>Lưu</p>
+                    <p style={{ margin: 10, color: 'white', margin: 0 }}>Lưu</p>
                 </div>
             </div>
         );
