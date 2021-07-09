@@ -8,15 +8,17 @@ import BaseRegisterScreen from "./screens/RegisterScreen";
 import BaseAccountScreen from './screens/AccountScreen';
 import BaseTestScreen from "./screens/TestScreen";
 import BaseDetailProductScreen from "./screens/DetailProductScreen";
+import BaseUIScreen from './screens/UiScreen';
 import './App.css';
 import { Navbar, NavDropdown, Form, FormControl, Nav, Button } from 'react-bootstrap';
+import Constant from "./constant";
 
 export default function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">My-Store</Navbar.Brand>
+        {/* <Navbar bg="light" expand="lg">
+          <Navbar.Brand href={`${Constant.BASE_URL_CLIENT}`}>My-Store</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -26,11 +28,10 @@ export default function App() {
             </Nav>
             <Form inline>
               <FormControl type="text" placeholder="Nhập từ khóa tìm kiếm" className="mr-sm-2" />
-              <Button variant="outline-success">Tìm</Button>
+              <Button variant="outline-success" style={{ color: "red", marginTop: 5 }}>Tìm</Button>
             </Form>
           </Navbar.Collapse>
-        </Navbar>
-
+        </Navbar> */}
         <Switch>
           <Route path="/:slugCategory/:slugProduct/:idProduct">
             <BaseDetailProductScreen />
@@ -52,6 +53,9 @@ export default function App() {
           </Route>
           <Route path="/account">
             <BaseAccountScreen />
+          </Route>
+          <Route path="/ui">
+            <BaseUIScreen />
           </Route>
           <Route path="/">
             <BaseHomeScreen />
